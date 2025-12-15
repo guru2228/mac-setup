@@ -200,9 +200,9 @@ setup_dotfiles() {
         fi
     done
 
-    # Copy zsh folder contents into ~/.zsh
+    # Copy zsh folder contents into ~/.
     local source_zsh_dir="$DOTFILES_DIR/zsh"
-    local target_zsh_dir="$HOME_DIR/zsh"
+    local target_zsh_dir="$HOME_DIR"
 
     if [[ -d "$source_zsh_dir" ]]; then
         log_info "Copying zsh folder contents to $target_zsh_dir"
@@ -210,7 +210,7 @@ setup_dotfiles() {
         mkdir -p "$target_zsh_dir"
 
         if command -v rsync >/dev/null 2>&1; then
-            # Trailing slashes are important: copy CONTENTS of zsh/ into ~/zsh/
+            # Trailing slashes are important: copy CONTENTS of zsh/ into 
             rsync -a --delete "${source_zsh_dir}/" "${target_zsh_dir}/"
         else
             log_warning "rsync not found; falling back to cp -R (may not fully mirror deletions)"
